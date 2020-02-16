@@ -29,7 +29,7 @@ class Modelcentury extends CI_model{
 
 
 
-		function insertKomentar($customer="", $komentar="" ){
+	function insertKomentar($customer="", $komentar="" ){
 
 			$data = array(
 				"id_customer" => $customer,
@@ -45,16 +45,58 @@ class Modelcentury extends CI_model{
 	}
 
 
+	function insertGuest($data=array()){
+
+		 
+
+		if(sizeof($data)>0){			
+			$this->db->insert("customer",$data);
+		}
+	 
+	}
+	
+	
+	function insertPegawai($data=array()){
+
+		 
+
+		if(sizeof($data)>0){			
+			$this->db->insert("master_pegawai",$data);
+		}
+	 
+	}
+	
+	function insertBellboyRecord($data=array()){
+
+		 
+
+		if(sizeof($data)>0){			
+			$this->db->insert("trx_bellboy",$data);
+		}
+	 
+	}
+
+
 	
 	function modelLogin($email="" , $password=""){ 
 		$this->db->where("email_pegawai",$email);
 		$this->db->where("password_pegawai", $password);
 		return $this->db->get("master_pegawai")->num_rows();
 	}
+	function dataLogin($email="" , $password=""){ 
+		$this->db->where("email_pegawai",$email);
+		$this->db->where("password_pegawai", $password);
+		return $this->db->get("master_pegawai")->row();
+	}
 
 	function modelMasterPegawai(){
 
 		return $this->db->get("master_pegawai")->result();
+	}
+	
+	function modelListTamu(){
+
+		return $this->db->get("trx_tamu")->result();
 	}
 
 
@@ -95,6 +137,8 @@ class Modelcentury extends CI_model{
 		return $query->result();
 
 	}
+
+
 
 
 

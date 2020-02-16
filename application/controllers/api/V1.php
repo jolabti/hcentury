@@ -155,6 +155,27 @@ class V1 extends REST_Controller {
 
     }
 
+    public function requestBellboy_post(){
+
+            $data = array(
+
+                 
+                "id_customer"=>$this->post("id_customer"),
+                "id_commander"=>$this->post("id_commander"),
+                "id_accepter"=>$this->post("id_accepter"),
+                "kode_pesan"=>$this->post("kode_pesan"),
+                "tgl_trx"=>$this->post("tgl_trx"),
+                "status"=>$this->post("status"),
+                "tgl_trx_mulai"=>$this->post("tgl_trx_mulai"),
+                "tgl_trx_selesai"=>$this->post("tgl_trx_selesai")
+                 
+            );
+ 
+                $this->Modelcentury->insertBellboyRecord($data);
+                $this->setMessage("Instruksi Kepada Bellboy Masuk", 200,$data);                
+
+    }
+
 
     public function inputkamar_post(){
 
@@ -208,6 +229,34 @@ class V1 extends REST_Controller {
 
     }
 
+
+    // Input Guest
+
+    public function insertGuest_post(){
+
+        $data = array(
+
+            "nama" => $this->post("nama"),
+            "no_ktp" => $this->post("no_ktp"),
+            "alamat" => $this->post("alamat"),
+            "no_hp" => $this->post("no_hp")
+        );
+
+
+        if($data!=NULL){
+            
+            $this->Modelcentury->insertGuest($data);
+            $this->setMessage("Berhasil", 200,$data); 
+        }
+        else{
+
+            $this->setMessage("gagal", 400,$data);
+        }
+    }
+
+
+
+
     public function inputkomentar_post(){
 
             // $this->load->model("Modelcentury");
@@ -232,14 +281,15 @@ class V1 extends REST_Controller {
         
            $cekLogin = $this->Modelcentury->modelLogin($emailTemp,$passwordTemp); 
 
-           if($cekLogin > 0 ){
+           if($cekLogin > 0 ){              
+                     
+               $this->setMessage("Berhasil dimuat", 200,$this->Modelcentury->dataLogin($emailTemp,$passwordTemp)); 
 
-                    $this->setMessage("Berhasil", 200,""); 
            }
 
            else{
 
-                    $this->setMessage("Gagal Login", 400,"");
+               $this->setMessage("Gagal Login", 400,"");
            }
 
 
@@ -247,6 +297,9 @@ class V1 extends REST_Controller {
 
             
     }
+
+
+
 
     public function masterPegawai_get(){
 
@@ -349,7 +402,7 @@ class V1 extends REST_Controller {
                 "message" => $message,               
                 "code"=> REST_Controller::HTTP_OK);
                 
-            $this->set_response($resMessage, REST_Controller::HTTP_OK);
+            $this->set_response($resMessage, REST_Controller::HTTP_NOT_FOUND);
            
         } 
                 
@@ -365,6 +418,62 @@ class V1 extends REST_Controller {
         
 
     }
+
+
+    public function register_post(){
+
+          $dataSend = array(
+
+                "nip_pegawai" => $this->post("nip"),
+                "nama_pegawai" => $this->post("nama"),
+                "alamat_pegawai" => $this->post("alamat"),
+                "email_pegawai" => $this->post("email"),
+                "password_pegawai" => $this->post("password"),
+                "id_jabatan" => "4",
+
+          );  
+          
+
+           if($this->Modelcentury->insertPegawai($data)){
+
+
+            $resMessage = array(
+                "message" => "Data has been inserted",
+                "code"=> REST_Controller::HTTP_OK,
+                "data" => $dataSend
+            );
+
+            $this->set_response($resMessage , REST_Controller::HTTP_OK);
+           
+        
+            }
+
+            else{
+
+
+            $resMessage = array(
+                "message" => "Data has been inserted",
+                "code"=> REST_Controller::HTTP_OK,
+                "data" => $dataSend
+            );
+
+            $this->set_response($resMessage , REST_Controller::HTTP_NOT_FOUND);
+            }
+    }
+
+    public function listTamu_get(){
+
+            if($this->Modelcentury->modelListTamu()!=NULL){
+                $this->setMessage("berhasil", 200, $this->Modelcentury->modelListTamu());                
+            }
+            else{
+                $this->setMessage("tidak ada data", 404, NULL);                
+            }
+    }
+
+
+
+
 
 
 }
