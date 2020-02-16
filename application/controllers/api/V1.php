@@ -429,35 +429,31 @@ class V1 extends REST_Controller {
                 "alamat_pegawai" => $this->post("alamat"),
                 "email_pegawai" => $this->post("email"),
                 "password_pegawai" => $this->post("password"),
-                "id_jabatan" => "4",
+                "id_jabatan" => $this->post("idJabatan"),
 
           );  
           
 
-           if($this->Modelcentury->insertPegawai($data)){
-
+           if($dataSend!=NULL){
 
             $resMessage = array(
                 "message" => "Data has been inserted",
                 "code"=> REST_Controller::HTTP_OK,
                 "data" => $dataSend
             );
-
-            $this->set_response($resMessage , REST_Controller::HTTP_OK);
-           
-        
+            $this->set_response($resMessage , REST_Controller::HTTP_OK);     
             }
 
-            else{
-
-
+            else
+            {
             $resMessage = array(
-                "message" => "Data has been inserted",
-                "code"=> REST_Controller::HTTP_OK,
+                "message" => "Data Failed to be inserted",
+                "code"=> REST_Controller::HTTP_NOT_FOUND,
                 "data" => $dataSend
             );
 
             $this->set_response($resMessage , REST_Controller::HTTP_NOT_FOUND);
+
             }
     }
 
@@ -471,6 +467,7 @@ class V1 extends REST_Controller {
             }
     }
 
+     
 
 
 
