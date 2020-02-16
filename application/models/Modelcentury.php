@@ -91,7 +91,10 @@ class Modelcentury extends CI_model{
 
 	function modelMasterPegawai(){
 
-		return $this->db->get("master_pegawai")->result();
+		$this->db->select('*');
+		$this->db->from('master_pegawai');
+		$this->db->join('master_jabatan', 'master_pegawai.id_jabatan = master_jabatan.id_jabatan', 'inner');
+		return $this->db->get()->result();
 	}
 	
 	function modelListTamu(){
