@@ -434,7 +434,9 @@ class V1 extends REST_Controller {
           );  
           
 
-           if($dataSend!=NULL){
+           if($dataSend!=null){
+
+            $this->Modelcentury->insertPegawai($dataSend);
 
             $resMessage = array(
                 "message" => "Data has been inserted",
