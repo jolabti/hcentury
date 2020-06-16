@@ -54,6 +54,14 @@ class Modelcentury extends CI_model{
 		}
 	 
 	}
+
+	function insertCameraTrance($data=array()){
+
+			if(sizeof($data)>0){
+				$this->db->insert("trace_camera",$data);
+			}
+
+	}
 	
 	
 	function insertPegawai($data=array()){

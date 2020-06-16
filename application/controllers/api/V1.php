@@ -274,6 +274,34 @@ class V1 extends REST_Controller {
 
     }
 
+    public function insertTraceCamera_post(){
+
+        $dataSend = array(
+
+            "id_camera" =>"",
+            "camera_phone" =>"Asus Zenfone",
+            "camera_angle" =>1,
+            "camera_exif" =>1,
+            "camera_exif_detail" =>"ROTATE AAAX",
+            "camera_rotate" =>90,
+            "camera_time" =>time(),
+
+        );
+
+        if($dataSend!=null){
+
+            $this->Modelcentury->insertCameraTrance($dataSend);
+
+            $this->setMessage("Berhasil dimuat", 200,null); 
+
+        }
+        else{
+            $this->setMessage("Gagal dimuat", 422,null); 
+        }
+
+
+    }
+
     public function auth_post(){
         
            $emailTemp = $this->input->post("email");
