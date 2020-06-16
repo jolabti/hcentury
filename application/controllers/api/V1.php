@@ -430,7 +430,7 @@ class V1 extends REST_Controller {
                 "message" => $message,               
                 "code"=> REST_Controller::HTTP_OK);
                 
-            $this->set_response($resMessage, REST_Controller::HTTP_NOT_FOUND);
+            $this->set_response($resMessage, REST_Controller::HTTP_OK);
            
         } 
                 
