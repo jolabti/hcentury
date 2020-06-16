@@ -279,11 +279,11 @@ class V1 extends REST_Controller {
         $dataSend = array(
 
             "id_camera" =>"",
-            "camera_phone" =>"Asus Zenfone",
-            "camera_angle" =>1,
-            "camera_exif" =>1,
-            "camera_exif_detail" =>"ROTATE AAAX",
-            "camera_rotate" =>90,
+            "camera_phone" =>$this->input->post("camphone"),
+            "camera_angle" =>$this->input->post("camangle"),
+            "camera_exif" =>$this->input->post("camexif"),
+            "camera_exif_detail" =>$this->input->post("camexifdetail"),
+            "camera_rotate" =>$this->input->post("camrotate"),
             "camera_time" =>time(),
 
         );
